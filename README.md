@@ -2,6 +2,10 @@
 
 **Anti-Flag** is a simply Console Application written in modern C++. It prevents Chainban's by clearing common Directories and Registry Keys, which Blizzard and Cheat Developers use to *Flag* your Device if you either were a Bad Boy >:( *grrr* or downloaded malware disguised as Overwatch Cheats.
 
+## How to Use ?
+
+Just run it, thats it really. Just keep in mind to **rename** your PC after doing so. Blizzard uses your PC Name to generate their "Device-Fingerprints". 
+
 ## How to Build ?
 
 Simple, **Clone the Repository** and **open the Solution**, *you may need some SDK's as we are using C++ Version 17*.
