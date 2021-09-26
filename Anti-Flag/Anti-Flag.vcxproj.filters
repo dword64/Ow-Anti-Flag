@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Patches">
+      <UniqueIdentifier>{419674e1-75e5-4a83-83d8-8b1b6f3b3b23}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Security">
+      <UniqueIdentifier>{5c7a0fac-5638-4372-8df5-62386fca78b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Misc">
+      <UniqueIdentifier>{99806d9d-2745-47f5-aaa8-314b9e7d4999}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Patches\Games">
+      <UniqueIdentifier>{99bc065a-ac40-4b52-810e-6bbc5057c1bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Patches\Others">
+      <UniqueIdentifier>{e1e4e6a4-4d0c-4593-a028-be43e6633b2c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Anti-Flag.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Console.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Help.hpp">
+      <Filter>Source Files\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="WinColor.hpp">
+      <Filter>Source Files\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="System.hpp">
+      <Filter>Source Files\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="xor.h">
+      <Filter>Source Files\Security</Filter>
+    </ClInclude>
+    <ClInclude Include="Extensions.hpp">
+      <Filter>Source Files\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="Processes.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Patch.hpp">
+      <Filter>Source Files\Patches</Filter>
+    </ClInclude>
+    <ClInclude Include="Executer.hpp" />
+    <ClInclude Include="Overwatch.hpp">
+      <Filter>Source Files\Patches\Games</Filter>
+    </ClInclude>
+    <ClInclude Include="Net.hpp">
+      <Filter>Source Files\Patches\Others</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
