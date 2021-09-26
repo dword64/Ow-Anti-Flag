@@ -117,7 +117,7 @@ namespace
 
                 return 0;
 
-                /*
+                
 #if !_DEBUG
                 Console::Log("Are you sure you want to run this program? [Y/N]", LogType::Info);
                 if (tolower(cin.get()) != 'y')
@@ -126,7 +126,7 @@ namespace
                     return 0;
                 }
 #endif
-*/
+
 
                 list<IPatch*>* patches = new list<IPatch*>
                 {
