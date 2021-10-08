@@ -23,3 +23,6 @@ As Blizzard keeps getting more aggressive with Bans, we have decide to make this
 ## License
 
 We have decided to put this Project under **Public Domain**!
+
+### Other Versions
+[Anti-Flag C# Version](https://github.com/AVISIX/Anti-Flag)
