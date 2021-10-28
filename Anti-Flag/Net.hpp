@@ -15,21 +15,10 @@ namespace
 {
 	using namespace std;
 
-	class Networking : public IPatch
+	class Networking
 	{
 	public:
-		std::string GetID()
-		{
-			return "Networking";
-		}
-
-		list<string>* GetProcesses()
-		{
-			return new list<string>{
-			};
-		}
-
-		bool DoPatch(char drive)
+		static void Patch(char drive)
 		{
 			Cmd::RunSilent("netsh winsock reset");
 			Cmd::RunSilent("netsh winsock reset catalog");
@@ -55,9 +44,6 @@ namespace
 			//do we need a loop?
 			
 			// "\\AppData\\Local\\Mozilla\Firefox\Profiles\<irgendein ordner>\cookies.sqlite"
-
-
-			return true;
 		}
 	};
 }

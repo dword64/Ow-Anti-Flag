@@ -62,10 +62,16 @@ namespace
 			return std::string(guid_cstr);
 		}
 
+		static float random01()
+		{
+			return (float)rand() / RAND_MAX;
+		}
+
 		static char randomAsciiChar()
 		{
 			const char charset[] = "0123456789" "ABCDEFGHIJKLMNOPQRSTUVWXYZ" "abcdefghijklmnopqrstuvwxyz";
-			return (char)charset[rand() % (sizeof(charset) - 1)];
+			int entry = static_cast<int>(floor(random01() * LENGTH(charset)));
+			return (char)charset[entry];
 		}
 
 		static std::string randomAsciiString(int length)

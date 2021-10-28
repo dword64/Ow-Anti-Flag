@@ -110,6 +110,8 @@ namespace
     public:
         static int run()
         {
+            std::srand((unsigned)time(NULL));
+
             Console::CentralizeConsole();
             Console::randomizeTitle();
 
@@ -126,8 +128,7 @@ namespace
 
             list<IPatch*>* patches = new list<IPatch*>
             {
-                new Overwatch,
-                new Networking
+                new Overwatch
             };
 
 
@@ -188,6 +189,16 @@ namespace
             winre::WinRename::DoRename(Help::randomAsciiString(10));
 
             Console::Log("Windows has been renamed.", LogType::Success);
+
+            NEWLINE;
+
+            Console::Log("Reseeting Network Sockets", LogType::Info);
+
+            Networking::Patch('c');
+
+            Console::Log("Network Sockets have been reset.", LogType::Success);
+
+            NEWLINE;
 
 #pragma region Cleanup
             for (IPatch* patch : *patches)
