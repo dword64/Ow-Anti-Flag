@@ -32,3 +32,5 @@
 *.app
 
 **/.vs/**
+x64/
+Anti-Flag/x64/
