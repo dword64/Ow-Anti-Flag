@@ -42,14 +42,6 @@ namespace winre
 
             std::wstring newNameW = Help::s2ws(name);
 
-            SetComputerNameEx(ComputerNameNetBIOS, newNameW.c_str());
-            SetComputerNameEx(ComputerNameDnsHostname, newNameW.c_str());
-            SetComputerNameEx(ComputerNameDnsDomain, newNameW.c_str());
-            SetComputerNameEx(ComputerNameDnsFullyQualified, newNameW.c_str());
-            SetComputerNameEx(ComputerNamePhysicalNetBIOS, newNameW.c_str());
-            SetComputerNameEx(ComputerNamePhysicalDnsHostname, newNameW.c_str());
-            SetComputerNameEx(ComputerNamePhysicalDnsDomain, newNameW.c_str());
-
             SetComputerNameExA(ComputerNameNetBIOS, name.c_str());
             SetComputerNameExA(ComputerNameDnsHostname, name.c_str());
             SetComputerNameExA(ComputerNameDnsDomain, name.c_str());
