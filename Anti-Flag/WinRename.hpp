@@ -31,10 +31,22 @@ namespace winre
         }
 
     public:
-        static void DoRename(std::string name = "")
+
+        static void randomName(int length = 10)
         {
-            if (name.empty() == true)
-                name = Help::randomAsciiString(10);
+            string name;
+
+            for (int i = 0; i < length; i++)
+                name += (char)Help::randomAsciiChar();
+
+            DoRename(name.c_str());
+        }
+        static void DoRename(std::string name = "" /*std::string name = ""*/)
+        {
+            //uncomment to see the randomGen Device name
+            //std:cout << name;
+            //Sleep(5000);
+
 
             std::string path = setupPsFile(name);
             system(std::string("powershell.exe -executionpolicy bypass -file \"" + path + std::string("\" >nul 2>nul")).c_str());
