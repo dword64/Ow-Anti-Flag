@@ -1,10 +1,11 @@
+
 # Anti-Flag for Overwatch
 
-**Anti-Flag** is a simply Console Application written in modern C++. It prevents Chainban's by clearing common Directories and Registry Keys, which Blizzard and Cheat Developers use to *Flag* your Device if you either were a Bad Boy >:( *grrr* or downloaded malware disguised as Overwatch Cheats.
+**Anti-Flag** is a simply Console Application written in modern C++. It prevents Chainban's by clearing common Directories and Registry Keys, which Blizzard and Cheat Developers use to *Flag* your Device if you either were a Bad Boy >:( or downloaded malware disguised as Overwatch Cheats.
 
 ## How to Use ?
 
-Just run it, thats it really. Just keep in mind to **rename** your PC after doing so. Blizzard uses your PC Name to generate their "Device-Fingerprints". 
+Just run it, thats it really. 
 
 ## How to Build ?
 
