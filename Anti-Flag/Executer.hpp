@@ -28,7 +28,7 @@ So I decided to put it into a new file/class to put it in an anonymous namespace
 #include "Patch.hpp"
 
 #include "Overwatch.hpp"
-
+#include "WinRename.hpp"
 #include "Net.hpp"
 
 #define NEWLINE cout << endl;
@@ -115,103 +115,94 @@ namespace
 
             PrintWatermark();
 
-                return 0;
-
-                
 #if !_DEBUG
-                Console::Log("Are you sure you want to run this program? [Y/N]", LogType::Info);
-                if (tolower(cin.get()) != 'y')
-                {
-                    Console::Log("Done.");
-                    return 0;
-                }
+            Console::Log("Are you sure you want to run this program? [Y/N]", LogType::Info);
+            if (tolower(cin.get()) != 'y')
+            {
+                Console::Log("Done.");
+                return 0;
+            }
 #endif
 
+            list<IPatch*>* patches = new list<IPatch*>
+            {
+                new Overwatch,
+                new Networking
+            };
 
-                list<IPatch*>* patches = new list<IPatch*>
-                {
-                    new Overwatch,
-                    new Networking
-                };
 
-
-                NEWLINE
+            NEWLINE;
 
 
 #pragma region Process Killer
-                    Console::Log("Killing Processes...", LogType::Warning);
+            Console::Log("Killing Processes...", LogType::Warning);
 
-                for_each(patches->begin(), patches->end(), [](IPatch* patch)
+            for_each(patches->begin(), patches->end(), [](IPatch* patch)
+                {
+                    list<string>* procs = patch->GetProcesses();
+
+                    for (string proc : *procs)
                     {
-                        list<string>* procs = patch->GetProcesses();
-
-                        for (string proc : *procs)
+                        if (ProcessHandler::killByName(proc))
                         {
-                            if (ProcessHandler::killByName(proc))
-                            {
-                                Console::Log(string("Killed '" + proc + "'.").c_str(), LogType::Success);
-                            }
+                            Console::Log(string("Killed '" + proc + "'.").c_str(), LogType::Success);
                         }
+                    }
 
-                        delete procs;
-                    });
+                    delete procs;
+                });
 
-                Console::Log("Done killing.", LogType::Info);
+            Console::Log("Done killing.", LogType::Info);
 #pragma endregion
 
 
-                NEWLINE
+            NEWLINE;
 
 
 #pragma region Patching
-                    Console::Log("Patching...", LogType::Warning);
+            Console::Log("Patching...", LogType::Warning);
 
-                for_each(patches->begin(), patches->end(), [](IPatch* patch)
-                    {
-                        Help::EnumDrives([=](char drive)
-                            {
+            for_each(patches->begin(), patches->end(), [](IPatch* patch)
+                {
+                    Help::EnumDrives([=](char drive)
+                        {
 
-                                Console::Log(string("Patching: '" + patch->GetID()).c_str(), LogType::Info);
+                            Console::Log(string("Running Patch: '" + patch->GetID()).c_str(), LogType::Info);
 
-                                patch->DoPatch(drive);
+                            patch->DoPatch(drive);
 
-                                Console::Log(string("Finished patching " + patch->GetID()).c_str(), LogType::Success);
+                            Console::Log(string("Finished Patch: " + patch->GetID()).c_str(), LogType::Success);
 
-                                NEWLINE
+                            NEWLINE;
+                        });
+                });
 
-                            });
-                    });
-
-                Console::Log("Done patching.", LogType::Info);
+            Console::Log("Done patching.", LogType::Info);
 #pragma endregion
 
 
-                NEWLINE
+            NEWLINE;
 
+            Console::Log("Renaming Windows...", LogType::Info);
+
+            winre::WinRename::DoRename(Help::randomAsciiString(10));
+
+            Console::Log("Windows has been renamed.", LogType::Success);
 
 #pragma region Cleanup
-                    for (IPatch* patch : *patches)
-                        delete patch;
+            for (IPatch* patch : *patches)
+                delete patch;
 
-                patches->clear();
+            patches->clear();
 
-                delete patches;
+            delete patches;
 #pragma endregion
 
-                /*
-                char a = 2;
-                auto test = [a](char poop) mutable {
-                    a++;
-                };
-                */
+            Console::Log("Finished.", LogType::Info);
 
+            NEWLINE;
 
-                Console::Log("Finished.", LogType::Info);
-            
-
-            NEWLINE
-
-                Console::Log("You can RESTART your Computer now to finish the cleaning.", LogType::Info);
+            Console::Log("You can RESTART your Computer now to finish the cleaning.", LogType::Info);
 
 #if _DEBUG
             Cmd::Run("pause");

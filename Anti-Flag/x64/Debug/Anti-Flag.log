@@ -1,0 +1,21 @@
+﻿  Anti-Flag.cpp
+F:\Repositories\Ow-Anti-Flag\Anti-Flag\Net.hpp(46,4): warning C4129: 'D': unrecognized character escape sequence
+F:\Repositories\Ow-Anti-Flag\Anti-Flag\Executer.hpp(78,82): warning C4267: 'argument': conversion from 'size_t' to 'DWORD', possible loss of data
+F:\Repositories\Ow-Anti-Flag\Anti-Flag\Executer.hpp(79,80): warning C4267: 'argument': conversion from 'size_t' to 'DWORD', possible loss of data
+F:\Repositories\Ow-Anti-Flag\Anti-Flag\Executer.hpp(80,80): warning C4267: 'argument': conversion from 'size_t' to 'DWORD', possible loss of data
+F:\Repositories\Ow-Anti-Flag\Anti-Flag\Executer.hpp(81,78): warning C4267: 'argument': conversion from 'size_t' to 'DWORD', possible loss of data
+F:\Repositories\Ow-Anti-Flag\Anti-Flag\Executer.hpp(82,78): warning C4267: 'argument': conversion from 'size_t' to 'DWORD', possible loss of data
+F:\Repositories\Ow-Anti-Flag\Anti-Flag\Executer.hpp(83,78): warning C4267: 'argument': conversion from 'size_t' to 'DWORD', possible loss of data
+F:\Repositories\Ow-Anti-Flag\Anti-Flag\Executer.hpp(84,78): warning C4267: 'argument': conversion from 'size_t' to 'DWORD', possible loss of data
+F:\Repositories\Ow-Anti-Flag\Anti-Flag\Executer.hpp(85,78): warning C4267: 'argument': conversion from 'size_t' to 'DWORD', possible loss of data
+F:\Repositories\Ow-Anti-Flag\Anti-Flag\Executer.hpp(86,78): warning C4267: 'argument': conversion from 'size_t' to 'DWORD', possible loss of data
+F:\Repositories\Ow-Anti-Flag\Anti-Flag\Executer.hpp(87,78): warning C4267: 'argument': conversion from 'size_t' to 'DWORD', possible loss of data
+F:\Repositories\Ow-Anti-Flag\Anti-Flag\Executer.hpp(88,80): warning C4267: 'argument': conversion from 'size_t' to 'DWORD', possible loss of data
+F:\Repositories\Ow-Anti-Flag\Anti-Flag\Executer.hpp(89,80): warning C4267: 'argument': conversion from 'size_t' to 'DWORD', possible loss of data
+F:\Repositories\Ow-Anti-Flag\Anti-Flag\Executer.hpp(90,80): warning C4267: 'argument': conversion from 'size_t' to 'DWORD', possible loss of data
+F:\Repositories\Ow-Anti-Flag\Anti-Flag\Executer.hpp(91,80): warning C4267: 'argument': conversion from 'size_t' to 'DWORD', possible loss of data
+F:\Repositories\Ow-Anti-Flag\Anti-Flag\Executer.hpp(92,80): warning C4267: 'argument': conversion from 'size_t' to 'DWORD', possible loss of data
+F:\Repositories\Ow-Anti-Flag\Anti-Flag\Executer.hpp(93,80): warning C4267: 'argument': conversion from 'size_t' to 'DWORD', possible loss of data
+F:\Repositories\Ow-Anti-Flag\Anti-Flag\Executer.hpp(94,80): warning C4267: 'argument': conversion from 'size_t' to 'DWORD', possible loss of data
+F:\Repositories\Ow-Anti-Flag\Anti-Flag\Executer.hpp(95,80): warning C4267: 'argument': conversion from 'size_t' to 'DWORD', possible loss of data
+  Anti-Flag.vcxproj -> F:\Repositories\Ow-Anti-Flag\x64\Debug\Anti-Flag.exe

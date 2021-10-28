@@ -25,19 +25,59 @@
 
 #pragma warning(disable : 4996)
 
+#ifndef _WIN32
+typedef struct _GUID {
+	uint32_t Data1;
+	uint16_t Data2;
+	uint16_t Data3;
+	uint8_t Data4[8];
+} GUID;
+#endif
+
 namespace
 {
 	using namespace colorwin;
-
-	static const char alphanum[] = "0123456789" "ABCDEFGHIJKLMNOPQRSTUVWXYZ" "abcdefghijklmnopqrstuvwxyz";
 
 	class Help
 	{
 		
 	public:
-		static int random255()
+		static GUID getGuid()
 		{
-			return alphanum[rand() % (sizeof(alphanum) - 1)];
+			GUID gidReference;
+			HRESULT hCreateGuid = CoCreateGuid(&gidReference);
+			return gidReference;
+		}
+
+		static std::string GuidToString(GUID guid)
+		{
+			char guid_cstr[39];
+
+			snprintf(guid_cstr, sizeof(guid_cstr),
+				"{%08x-%04x-%04x-%02x%02x-%02x%02x%02x%02x%02x%02x}",
+				guid.Data1, guid.Data2, guid.Data3,
+				guid.Data4[0], guid.Data4[1], guid.Data4[2], guid.Data4[3],
+				guid.Data4[4], guid.Data4[5], guid.Data4[6], guid.Data4[7]);
+
+			return std::string(guid_cstr);
+		}
+
+		static char randomAsciiChar()
+		{
+			const char charset[] = "0123456789" "ABCDEFGHIJKLMNOPQRSTUVWXYZ" "abcdefghijklmnopqrstuvwxyz";
+			return (char)charset[rand() % (sizeof(charset) - 1)];
+		}
+
+		static std::string randomAsciiString(int length)
+		{
+			length = max(length, 1);
+
+			std::string result;
+
+			for (int i = 0; i < length; i++)
+				result += randomAsciiChar();
+
+			return result;
 		}
 
 		static std::string CurUser()

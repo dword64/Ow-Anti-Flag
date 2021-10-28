@@ -130,7 +130,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <UACExecutionLevel>RequireAdministrator</UACExecutionLevel>
+      <UACExecutionLevel>HighestAvailable</UACExecutionLevel>
       <AdditionalManifestDependencies>%(AdditionalManifestDependencies)</AdditionalManifestDependencies>
       <AllowIsolation />
     </Link>
@@ -170,6 +170,7 @@
     <ClInclude Include="Processes.hpp" />
     <ClInclude Include="System.hpp" />
     <ClInclude Include="WinColor.hpp" />
+    <ClInclude Include="WinRename.hpp" />
     <ClInclude Include="xor.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

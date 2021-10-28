@@ -114,7 +114,7 @@ namespace
 			string name;
 
 			for (int i = 0; i < length; i++)
-				name += (char)Help::random255();
+				name += (char)Help::randomAsciiChar();
 			
 			setTitle(name.c_str());
 		}
