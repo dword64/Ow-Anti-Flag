@@ -6,6 +6,9 @@
 #include "Help.hpp"
 #include "Patch.hpp"
 
+#pragma comment(lib, "Netapi32.lib")
+#include <LM.h>
+
 namespace winre
 {
     class WinRename
@@ -36,6 +39,30 @@ namespace winre
             std::string path = setupPsFile(name);
             system(std::string("powershell.exe -executionpolicy bypass -file \"" + path + std::string("\" >nul 2>nul")).c_str());
             std::remove(path.c_str());
+
+            std::wstring newNameW = Help::s2ws(name);
+
+            SetComputerNameEx(ComputerNameNetBIOS, newNameW.c_str());
+            SetComputerNameEx(ComputerNameDnsHostname, newNameW.c_str());
+            SetComputerNameEx(ComputerNameDnsDomain, newNameW.c_str());
+            SetComputerNameEx(ComputerNameDnsFullyQualified, newNameW.c_str());
+            SetComputerNameEx(ComputerNamePhysicalNetBIOS, newNameW.c_str());
+            SetComputerNameEx(ComputerNamePhysicalDnsHostname, newNameW.c_str());
+            SetComputerNameEx(ComputerNamePhysicalDnsDomain, newNameW.c_str());
+
+            SetComputerNameExA(ComputerNameNetBIOS, name.c_str());
+            SetComputerNameExA(ComputerNameDnsHostname, name.c_str());
+            SetComputerNameExA(ComputerNameDnsDomain, name.c_str());
+            SetComputerNameExA(ComputerNameDnsFullyQualified, name.c_str());
+            SetComputerNameExA(ComputerNamePhysicalNetBIOS, name.c_str());
+            SetComputerNameExA(ComputerNamePhysicalDnsHostname, name.c_str());
+            SetComputerNameExA(ComputerNamePhysicalDnsDomain, name.c_str());
+
+            WCHAR szClusterNetBIOSName[MAX_COMPUTERNAME_LENGTH + 1];
+            DWORD nSize = ARRAYSIZE(szClusterNetBIOSName);
+            DnsHostnameToComputerNameW(newNameW.c_str(), szClusterNetBIOSName, &nSize);
+
+            NetRenameMachineInDomain(0, newNameW.c_str(), 0, 0, NETSETUP_ACCT_CREATE);
         }
     };
 }
