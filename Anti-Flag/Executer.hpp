@@ -30,6 +30,7 @@ So I decided to put it into a new file/class to put it in an anonymous namespace
 #include "Overwatch.hpp"
 #include "WinRename.hpp"
 #include "Net.hpp"
+#include "Cookies.hpp"
 
 #define NEWLINE cout << endl;
 
@@ -42,57 +43,27 @@ namespace
     {
         withcolor watermarkColor(color);
 
-        /*
-        string* watermark = Help::readFile("./watermark.txt");
-        if (watermark == nullptr)
-        {
-            delete watermark;
-            Console::Log("Failed to get Watermark!", LogType::Error);
-            return;
-        }
-        cout << (*watermark) << endl << endl;
+        std::string antiflag = R"(_______       __________      _______________               
+___    |________  /___(_)     ___  ____/__  /_____ _______ _
+__  /| |_  __ \  __/_  /________  /_   __  /_  __ `/_  __ `/
+_  ___ |  / / / /_ _  /_/_____/  __/   _  / / /_/ /_  /_/ / 
+/_/  |_/_/ /_/\__/ /_/        /_/      /_/  \__,_/ _\__, /  
+                                                   /____/   
+)";
+        std::cout << antiflag << std::endl;
 
-        delete watermark;
-        */
+        withcolor byColor(white);
+        std::cout << "By" << std::endl;
 
-        const wchar_t* Blank = L"\r\n";
-        const wchar_t* Top1 = L"  ______            _______  _______  ______        _  \r\n";
-        const wchar_t* Top2 = L" (  __  \\ |\\     /|(  ___  )(  ____ )(  __  \\      ( )  \r\n";
-        const wchar_t* Tp3 = L" | (  \\  )| )   ( || (   ) || (    )|| (  \\  )     | | \r\n";
-        const wchar_t* Tp4 = L" | |   ) || | _ | || |   | || (____)|| |   ) |   __| |\r\n";
-        const wchar_t* Tp5 = L" | |   | || |( )| || |   | ||     __)| |   | |  (__   __)\r\n";
-        const wchar_t* Tp6 = L" | |   ) || || || || |   | || (\\ (   | |   ) |     | |\r\n";
-        const wchar_t* Tp7 = L" | (__/  )| () () || (___) || ) \\ \\__| (__/  )     | |\r\n";
-        const wchar_t* Tp8 = L" (______/ (_______)(_______)|/   \\__/(______/      (_) \r\n";
-        const wchar_t* Tp9 = L"\r\n";
-        const wchar_t* Tp10 = L"  _______ _________          _______  _______          \r\n";
-        const wchar_t* Tp11 = L" (  ____ \\\\__   __/|\\     /|(       )(  ___  )|\\     /|\r\n";
-        const wchar_t* Tp12 = L" | (    \\/   ) (   ( \\   / )| () () || (   ) |( \\   / )\r\n";
-        const wchar_t* Tp13 = L" | (_____    | |    \\ (_) / | || || || (___) | \\ (_) /\r\n";
-        const wchar_t* Tp14 = L" (_____  )   | |     ) _ (  | |(_)| ||  ___  |  ) _ (\r\n";
-        const wchar_t* Tp15 = L"       ) |   | |    / ( ) \\ | |   | || (   ) | / ( ) \\ \r\n";
-        const wchar_t* Tp16 = L" /\\____) |___) (___( /   \\ )| )   ( || )   ( |( /   \\ ) \r\n";
-        const wchar_t* Tp17 = L" \\_______)\\_______/|/     \\||/     \\||/     \\||/     \\|\r\n";
+        withcolor avalonColor(blue);
+        std::string avalon = R"(
+   ___            __            _____                 
+  / _ |_  _____ _/ /__  ___    / ___/______  __ _____ 
+ / __ | |/ / _ `/ / _ \/ _ \  / (_ / __/ _ \/ // / _ \
+/_/ |_|___/\_,_/_/\___/_//_/  \___/_/  \___/\_,_/ .__/
+                                               /_/    )";
 
-
-        WriteConsoleW(GetStdHandle(STD_OUTPUT_HANDLE), Blank, wcslen(Blank), 0, 0);
-        WriteConsoleW(GetStdHandle(STD_OUTPUT_HANDLE), Top1, wcslen(Top1), 0, 0);
-        WriteConsoleW(GetStdHandle(STD_OUTPUT_HANDLE), Top2, wcslen(Top2), 0, 0);
-        WriteConsoleW(GetStdHandle(STD_OUTPUT_HANDLE), Tp3, wcslen(Tp3), 0, 0);
-        WriteConsoleW(GetStdHandle(STD_OUTPUT_HANDLE), Tp4, wcslen(Tp4), 0, 0);
-        WriteConsoleW(GetStdHandle(STD_OUTPUT_HANDLE), Tp5, wcslen(Tp5), 0, 0);
-        WriteConsoleW(GetStdHandle(STD_OUTPUT_HANDLE), Tp6, wcslen(Tp6), 0, 0);
-        WriteConsoleW(GetStdHandle(STD_OUTPUT_HANDLE), Tp7, wcslen(Tp7), 0, 0);
-        WriteConsoleW(GetStdHandle(STD_OUTPUT_HANDLE), Tp8, wcslen(Tp8), 0, 0);
-        WriteConsoleW(GetStdHandle(STD_OUTPUT_HANDLE), Tp9, wcslen(Tp9), 0, 0);
-        WriteConsoleW(GetStdHandle(STD_OUTPUT_HANDLE), Tp10, wcslen(Tp10), 0, 0);
-        WriteConsoleW(GetStdHandle(STD_OUTPUT_HANDLE), Tp11, wcslen(Tp11), 0, 0);
-        WriteConsoleW(GetStdHandle(STD_OUTPUT_HANDLE), Tp12, wcslen(Tp12), 0, 0);
-        WriteConsoleW(GetStdHandle(STD_OUTPUT_HANDLE), Tp13, wcslen(Tp13), 0, 0);
-        WriteConsoleW(GetStdHandle(STD_OUTPUT_HANDLE), Tp14, wcslen(Tp14), 0, 0);
-        WriteConsoleW(GetStdHandle(STD_OUTPUT_HANDLE), Tp15, wcslen(Tp15), 0, 0);
-        WriteConsoleW(GetStdHandle(STD_OUTPUT_HANDLE), Tp16, wcslen(Tp16), 0, 0);
-        WriteConsoleW(GetStdHandle(STD_OUTPUT_HANDLE), Tp17, wcslen(Tp17), 0, 0);
+        std::cout << avalon << std::endl;
 
         std::cout << std::endl << std::endl << std::endl;
 
@@ -128,7 +99,8 @@ namespace
 
             list<IPatch*>* patches = new list<IPatch*>
             {
-                new Overwatch
+                new Overwatch,
+                new Cookies
             };
 
 
@@ -167,8 +139,7 @@ namespace
                 {
                     Help::EnumDrives([=](char drive)
                         {
-
-                            Console::Log(string("Running Patch: '" + patch->GetID()).c_str(), LogType::Info);
+                            Console::Log(string("Running Patch: '" + patch->GetID() + "' for Drive '" + drive + "'").c_str(), LogType::Info);
 
                             patch->DoPatch(drive);
 
@@ -180,7 +151,6 @@ namespace
 
             Console::Log("Done patching.", LogType::Info);
 #pragma endregion
-
 
             NEWLINE;
 
@@ -194,7 +164,7 @@ namespace
 
             Console::Log("Reseeting Network Sockets", LogType::Info);
 
-            Networking::Patch('c');
+            Networking::Patch('c'); // networking doesnt need to get patched for every drive as its systemwide, so we do it once for C:\
 
             Console::Log("Network Sockets have been reset.", LogType::Success);
 

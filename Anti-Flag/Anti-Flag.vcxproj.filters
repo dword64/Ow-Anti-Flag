@@ -61,5 +61,8 @@
     <ClInclude Include="WinRename.hpp">
       <Filter>Source Files\Patches\Others</Filter>
     </ClInclude>
+    <ClInclude Include="Cookies.hpp">
+      <Filter>Source Files\Patches\Others</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
