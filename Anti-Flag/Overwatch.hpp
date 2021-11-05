@@ -37,9 +37,15 @@ namespace
 			};
 		}
 
+		/*
+			Please Note:
+
+			Not everything we are deleting here is related to Blizzard Device Flags, we are also clearing Cache etc simply to 
+			*clean* your installation.
+		*/
 		bool DoPatch(char drive)
 		{
-#pragma region General Blizz shit
+#pragma region Blizz Device Flags / Installation Cleanup
 			DELDIR(drive + S(":\\Users\\") + USER + S("\\AppData\\Local\\Battle.net\\"));
 			DELDIR(drive + S(":\\Users\\") + USER + S("\\AppData\\Local\\Blizzard\\"));
 			DELDIR(drive + S(":\\Users\\") + USER + S("\\AppData\\Local\\Blizzard Entertainment\\"));
@@ -53,28 +59,6 @@ namespace
 
 			DELDIR(drive + S(":\\Program Files (x86)\\Overwatch\\_retail_\\cache\\"));
 			DELDIR(drive + S(":\\Program Files (x86)\\Overwatch\\_retail_\\GPUCache\\"));
-
-			// clear db files and stuff // 
-			DELFILE(drive + S(":\\Program Files (x86)\\Overwatch\\.patch.result"));
-			DELFILE(drive + S(":\\Program Files (x86)\\Overwatch\\.product.db"));
-			DELFILE(drive + S(":\\Program Files (x86)\\Overwatch\\.product.db.old"));
-			DELFILE(drive + S(":\\Program Files (x86)\\Overwatch\\Launcher.db.old"));
-			DELFILE(drive + S(":\\Program Files (x86)\\Overwatch\\.product.db.old.new"));
-			DELFILE(drive + S(":\\Program Files (x86)\\Overwatch\\Launcher.db.old.new"));
-			DELFILE(drive + S(":\\Program Files (x86)\\Overwatch\\Launcher.db"));
-			DELFILE(drive + S(":\\Program Files (x86)\\Overwatch\\.build.info"));
-			DELFILE(drive + S(":\\Program Files (x86)\\Overwatch\\debug.log"));
-			DELFILE(drive + S(":\\Program Files (x86)\\Battle.net\\.product.db"));
-			DELFILE(drive + S(":\\Program Files (x86)\\Battle.net\\Launcher.db"));
-			DELFILE(drive + S(":\\Program Files (x86)\\Battle.net\\.product.db.new"));
-			DELFILE(drive + S(":\\Program Files (x86)\\Battle.net\\.product.db.old"));
-			DELFILE(drive + S(":\\Program Files (x86)\\Battle.net\\Launcher.db.new"));
-			DELFILE(drive + S(":\\Program Files (x86)\\Battle.net\\Launcher.db.old"));
-			DELFILE(drive + S(":\\Program Files (x86)\\Battle.net\\.build.info"));
-			DELFILE(drive + S(":\\Program Files (x86)\\Battle.net\\.patch.result"));
-			DELFILE(drive + S(":\\ProgramData\\Battle.net\\Agent\\.patch.result"));
-			DELFILE(drive + S(":\\Program Files (x86)\\Battle.net\\Agent\\.product.db"));
-			DELFILE(drive + S(":\\Program Files (x86)\\Battle.net\\Agent\\product.db"));
 
 			// delete old bnet agents. the one with the greatest number is the latest one all other can be deleted
 			{
@@ -126,8 +110,6 @@ namespace
 				}
 			}
 
-			REGDEL("HKEY_LOCAL_MACHINE\\SOFTWARE\\WOW6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\Overwatch");
-			REGDEL("HKEY_LOCAL_MACHINE\\SOFTWARE\\WOW6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\Battle.net");
 			REGDEL("HKEY_LOCAL_MACHINE\\SOFTWARE\\WOW6432Node\\Blizzard Entertainment");
 			REGDEL("HKEY_CURRENT_USER\\SOFTWARE\\Blizzard Entertainment");
 			REGDEL("HKEY_CURRENT_USER\\SOFTWARE\\Activision");
@@ -138,21 +120,16 @@ namespace
 			REGDEL("HKEY_CURRENT_USER\\SOFTWARE\\Classes\\VirtualStore\\MACHINE\\SOFTWARE\\WOW6432Node\\Activision");
 #pragma endregion 
 
-#pragma region Cheats n stuff
 
+
+#pragma region Cheats 
 			/* Start of Ow-Cheat Orion*/
 			DELDIR(drive + S(":\\ProgramData\\Orion\\"));
 			/* END of Ow-Cheat Orion*/
 			
-			
 			/* START of Ow-Cheat Critical Hit */
 			REGDEL("HKLM\\SOFTWARE\\00330-80000-00000-AA302");
 			/* END of Ow-Cheat Critical Hit */
-
-
-			/*Start of Ow-Cheat: Noble*/
-			/*END of Ow-Cheat: Noble*/
-
 #pragma endregion
 
 			return true;
