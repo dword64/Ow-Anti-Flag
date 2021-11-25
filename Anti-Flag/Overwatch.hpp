@@ -130,6 +130,12 @@ namespace
 			/* START of Ow-Cheat Critical Hit */
 			REGDEL("HKLM\\SOFTWARE\\00330-80000-00000-AA302");
 			/* END of Ow-Cheat Critical Hit */
+
+			/* START of Ow-Cheat Noble/hyperFlick */
+			DELDIR(drive + S(":\\Users\\") + USER + S("\\AppData\\Local\\Temp\\")); //due some User reports, we found out that they save/leave traces on your Pc inside the Temp folder! Credits you know
+			/* END of Ow-Cheat Noble/hyperFlick */
+
+
 #pragma endregion
 
 			return true;
