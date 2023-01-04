@@ -162,7 +162,7 @@ _  ___ |  / / / /_ _  /_/_____/  __/   _  / / /_/ /_  /_/ /
 
             NEWLINE;
 
-            Console::Log("Reseeting Network Sockets", LogType::Info);
+            Console::Log("Resetting Network Sockets", LogType::Info);
 
             Networking::Patch('c'); // networking doesnt need to get patched for every drive as its systemwide, so we do it once for C:\
 
