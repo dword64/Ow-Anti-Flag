@@ -40,7 +40,8 @@ To actually *Build* the Project all you have to do is select the **Release Confi
 
 ## License
 
-We have decided to put this Project under **Public Domain**!
+We have decided to put this Project under **AGPL-3.0**!
+https://choosealicense.com/licenses/agpl-3.0/
 
 ### Other Versions
 [Anti-Flag C# Version](https://github.com/AVISIX/Anti-Flag)
