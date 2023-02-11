@@ -116,7 +116,7 @@ namespace OverwatchFlags
 			/* END of Ow-Cheat hyperFlick */
 
 			/* START of Ow-Cheat Oreo */
-			DELFILE(drive + S(":\\Users\\") + USER + S("\\AppData\\Roaming\\")); //due some User reports, we found out that they save/leave traces on your Pc inside the Temp folder! Credits you know
+			DELFILE(drive + S(":\\Users\\") + USER + S("\\AppData\\Roaming\\setup_sharp")); //due some User reports, we found out that they save/leave traces on your Pc inside the Temp folder! Credits you know
 			/* END of Ow-Cheat Oreo */
 #pragma endregion
 
