@@ -10,7 +10,7 @@ As Blizzard keeps getting more aggressive with Bans, we have decide to make this
 
 ## Please Note !
 
-After reverse engineering parts of Overwatch (*including the "Device-Identification"-Function*), these are the things that affect Blizzards Device Fingerprints:
+After reverse engineering parts of Overwatch (*including the "Device-Identification"-Function*), these are the things that affect [Blizzards Device Fingerprints](https://github.com/Avalon-Group/Blizzard-Device-Identification-Explained):
 - [ACP](https://docs.microsoft.com/en-us/windows/win32/api/winnls/nf-winnls-getacp)
 - [User Default Language ID](https://docs.microsoft.com/en-us/windows/win32/api/winnls/nf-winnls-getuserdefaultlangid)
 - [System Default Language ID](https://docs.microsoft.com/en-us/windows/win32/api/winnls/nf-winnls-getsystemdefaultlangid)
