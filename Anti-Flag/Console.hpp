@@ -5,7 +5,6 @@
 	- DWORD64
 	- Sixmax
 */
-
 #pragma once
 
 class Console;

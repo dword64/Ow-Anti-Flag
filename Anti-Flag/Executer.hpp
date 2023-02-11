@@ -10,7 +10,6 @@ So I decided to put it into a new file/class to put it in an anonymous namespace
     - DWORD64
     - Sixmax
 */
-
 #pragma once 
 
 #include <Windows.h>
@@ -38,40 +37,41 @@ namespace
 {
     using namespace std;
     using namespace colorwin;
+    using namespace OverwatchFlags;
 
     void PrintWatermark(CW_COLORS color = red)
     {
         withcolor watermarkColor(color);
 
-        std::string antiflag = R"(_______       __________      _______________               
+        string antiflag = R"(_______       __________      _______________               
 ___    |________  /___(_)     ___  ____/__  /_____ _______ _
 __  /| |_  __ \  __/_  /________  /_   __  /_  __ `/_  __ `/
 _  ___ |  / / / /_ _  /_/_____/  __/   _  / / /_/ /_  /_/ / 
 /_/  |_/_/ /_/\__/ /_/        /_/      /_/  \__,_/ _\__, /  
                                                    /____/   
 )";
-        std::cout << antiflag << std::endl;
+        cout << antiflag << endl;
 
         withcolor byColor(white);
-        std::cout << "By" << std::endl;
+        cout << "By" << endl;
 
         withcolor avalonColor(blue);
-        std::string avalon = R"(
+        string avalon = R"(
    ___            __            _____                 
   / _ |_  _____ _/ /__  ___    / ___/______  __ _____ 
  / __ | |/ / _ `/ / _ \/ _ \  / (_ / __/ _ \/ // / _ \
 /_/ |_|___/\_,_/_/\___/_//_/  \___/_/  \___/\_,_/ .__/
                                                /_/    )";
 
-        std::cout << avalon << std::endl;
+        cout << avalon << endl;
 
-        std::cout << std::endl << std::endl << std::endl;
+        cout << endl << endl << endl;
 
-        std::cout << colorwin::color(red) << "WARNING:" << std::endl;
-        std::cout << colorwin::color(yellow) << "all instances of 'Overwatch' and 'Battle.Net' will be closed." << std::endl;
-        std::cout << colorwin::color(yellow) << "Also your Browser Cookies will be cleared, so make sure you have all your Login's saved." << std::endl;
+        cout << colorwin::color(red) << "WARNING:" << endl;
+        cout << colorwin::color(yellow) << "all instances of 'Overwatch' and 'Battle.Net' will be closed." << endl;
+        cout << colorwin::color(yellow) << "Also your Browser Cookies will be cleared, so make sure you have all your Login's saved." << endl;
 
-        std::cout << std::endl;
+        cout << endl;
 
         withcolor reset(white);
     }
@@ -81,7 +81,7 @@ _  ___ |  / / / /_ _  /_/_____/  __/   _  / / /_/ /_  /_/ /
     public:
         static int run()
         {
-            std::srand((unsigned)time(NULL));
+            srand((unsigned)time(NULL));
 
             Console::CentralizeConsole();
             Console::randomizeTitle();
@@ -162,7 +162,7 @@ _  ___ |  / / / /_ _  /_/_____/  __/   _  / / /_/ /_  /_/ /
 
             NEWLINE;
 
-            Console::Log("Reseeting Network Sockets", LogType::Info);
+            Console::Log("Resetting Network Sockets", LogType::Info);
 
             Networking::Patch('c'); // networking doesnt need to get patched for every drive as its systemwide, so we do it once for C:\
 
@@ -195,9 +195,7 @@ _  ___ |  / / / /_ _  /_/_____/  __/   _  / / /_/ /_  /_/ /
         }
     };
 }
-
 #undef NEWLINE
-
 /*
     Successor of Anti-Flag and Anti-Flag-V2.
 

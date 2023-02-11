@@ -64,5 +64,8 @@
     <ClInclude Include="Cookies.hpp">
       <Filter>Source Files\Patches\Others</Filter>
     </ClInclude>
+    <ClInclude Include="RegKey.hpp">
+      <Filter>Source Files\Misc</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,68 +1,79 @@
+/*
+	Successor of Anti-Flag and Anti-Flag-V2.
+
+	Developers:
+	- DWORD64
+	- Sixmax
+*/
 #pragma once 
 
 #include "Patch.hpp"
 
-namespace
+
+using namespace std;
+namespace fs = filesystem;
+
+class Cookies : public IPatch
 {
-	using namespace std;
-	namespace fs = std::filesystem;
-
-	class Cookies : public IPatch
+public:
+	string GetID()
 	{
-	public:
-		std::string GetID()
-		{
-			return "Browser Cookies";
-		}
+		return "Browser Cookies";
+	}
 
-		list<string>* GetProcesses()
+	list<string>* GetProcesses()
+	{
+		return new list<string>
 		{
-			return new list<string>
+			"msedge","firefox","chrome","brave","opera"
+		};
+	}
+
+	bool DoPatch(char drive)
+	{
+		string USERPROFILE = getenv("USERPROFILE");
+		string APPDATA = getenv("APPDATA");
+
+		// Brave Cookies
+		if (!DELFILE((drive + S(":") + USERPROFILE + S("\\AppData\\Local\\BraveSoftware\\Brave-Browser\\User Data\\Default\\Cookies")).c_str()))
+			printf("Error deleting Brave cookies\n");
+
+		// chrome Cookies
+		if (!DELFILE((drive + S(":") + APPDATA + S("\\Google\\Chrome\\User Data\\Default\\Cookies")).c_str()))
+			printf("Error deleting Chrome cookies\n");
+
+		// opera Cookies
+		if (!DELFILE((drive + S(":") + APPDATA + S("\\Opera Software\\Opera Stable\\Cookies")).c_str()))
+			printf("Error deleting Opera cookies\n");
+
+		// firefox cookies
+		string path = drive + S(":") + APPDATA + S("\\Mozilla\\Firefox\\Profiles\\");
+
+		if (fs::exists(path) == true)
+		{
+			for (const auto& entry : fs::directory_iterator(path))
 			{
-				"msedge",
-				"firefox",
-				"chrome",
-				"brave",
-				"opera"
-			};
-		}
+				if (entry.is_directory() == false)
+					continue;
 
-		bool DoPatch(char drive)
-		{
-			// Brave Cookies
-			DELFILE(drive + S(":\\Users\\") + USER + S("\\AppData\\Local\\BraveSoftware\\Brave-Browser\\User Data\\Default\\Cookies"));
-
-			// chrome Cookies
-			DELFILE(drive + S(":\\Users\\") + USER + S("\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Cookies"));
-
-			// opera Cookies
-			DELFILE(drive + S(":\\Users\\") + USER + S("\\AppData\\Local\\Opera Software\\Opera Stable\\Cookies"));
-
-			// firefox cookies
-			{
-				std::string path = drive + S(":\\Users\\") + USER + S("\\AppData\\Local\\Mozilla\\Firefox\\Profiles\\");
+				string path = entry.path().u8string();
+				if (ends_with(path, "\\") == false)
+					path += "\\";
+				path += "cookies.sqlite";
 
 				if (fs::exists(path) == true)
-				{
-					for (const auto& entry : fs::directory_iterator(path))
-					{
-						if (entry.is_directory() == false)
-							continue;
-
-						std::string path = entry.path().u8string();
-
-						if (ends_with(path, "\\") == false)
-							path += "\\";
-
-						path += "cookies.sqlite";
-
-						if (fs::exists(path) == true)
-							DELFILE(path);
-					}
-				}
+					if (!DELFILE(path.c_str()))
+						printf("Error deleting Firefox cookies\n");
 			}
-
-			return true;
 		}
-	};
-}
+		return true;
+	}
+};
+
+/*
+	Successor of Anti-Flag and Anti-Flag-V2.
+
+	Developers:
+	- DWORD64
+	- Sixmax
+*/

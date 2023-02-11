@@ -5,33 +5,31 @@
 	- DWORD64
 	- Sixmax
 */
-
 #pragma once
 
 #include <string>
+#include <algorithm>
 
-#define LENGTH(a) (sizeof(a) / sizeof(a[0]))
+using namespace std;
 
-namespace
+namespace Utils
 {
-	bool ends_with(std::string const& value, std::string const& ending)
+	inline bool ends_with(const string &value, const string &ending)
 	{
 		if (ending.size() > value.size()) return false;
-		return std::equal(ending.rbegin(), ending.rend(), value.rbegin());
+		return equal(ending.rbegin(), ending.rend(), value.rbegin());
 	}
 
-	std::string toLowerStr(std::string str)
+	inline string toLowerStr(string str)
 	{
 		if (str.empty())
 			return str;
 
-		for (unsigned int i = 0; i < str.length(); i++)
-			str[i] = tolower(str.c_str()[i]);
+		transform(str.begin(), str.end(), str.begin(), ::tolower);
 
 		return str;
 	}
 }
-
 /*
 	Successor of Anti-Flag and Anti-Flag-V2.
 

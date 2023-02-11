@@ -5,7 +5,6 @@
 	- DWORD64
 	- Sixmax
 */
-
 #pragma once
 
 #pragma comment(lib, "Shlwapi.lib")
@@ -34,9 +33,9 @@ typedef struct _GUID {
 } GUID;
 #endif
 
-namespace
-{
 	using namespace colorwin;
+	using namespace std;
+	using namespace Utils;
 
 	class Help
 	{
@@ -49,7 +48,7 @@ namespace
 			return gidReference;
 		}
 
-		static std::string GuidToString(GUID guid)
+		static string GuidToString(GUID guid)
 		{
 			char guid_cstr[39];
 
@@ -59,7 +58,7 @@ namespace
 				guid.Data4[0], guid.Data4[1], guid.Data4[2], guid.Data4[3],
 				guid.Data4[4], guid.Data4[5], guid.Data4[6], guid.Data4[7]);
 
-			return std::string(guid_cstr);
+			return string(guid_cstr);
 		}
 
 		static float random01()
@@ -70,15 +69,15 @@ namespace
 		static char randomAsciiChar()
 		{
 			const char charset[] = "0123456789" "ABCDEFGHIJKLMNOPQRSTUVWXYZ" "abcdefghijklmnopqrstuvwxyz";
-			int entry = static_cast<int>(floor(random01() * LENGTH(charset)));
+			int entry = static_cast<int>(floor(random01() * (sizeof(charset) / sizeof(charset[0]))));
 			return (char)charset[entry];
 		}
 
-		static std::string randomAsciiString(int length)
+		static string randomAsciiString(int length)
 		{
 			length = max(length, 1);
 
-			std::string result;
+			string result;
 
 			for (int i = 0; i < length; i++)
 				result += randomAsciiChar();
@@ -86,7 +85,7 @@ namespace
 			return result;
 		}
 
-		static std::string CurUser()
+		static string CurUser()
 		{
 			wchar_t un[256 + 1];
 			DWORD unLen = 256 + 1;
@@ -94,48 +93,48 @@ namespace
 			return ws2s(un);
 		}
 
-		static LPCWSTR StringToWStr(std::string s)
+		static LPCWSTR StringToWStr(string s)
 		{
-			std::wstring stemp = std::wstring(s.begin(), s.end());
+			wstring stemp = wstring(s.begin(), s.end());
 			LPCWSTR sw = stemp.c_str();
 			return sw;
 		}
 
-		static std::wstring s2ws(const std::string& str)
+		static wstring s2ws(const string& str)
 		{
-			using convert_typeX = std::codecvt_utf8<wchar_t>;
-			std::wstring_convert<convert_typeX, wchar_t> converterX;
+			using convert_typeX = codecvt_utf8<wchar_t>;
+			wstring_convert<convert_typeX, wchar_t> converterX;
 
 			return converterX.from_bytes(str);
 		}
 
-		static std::string ws2s(const std::wstring& wstr)
+		static string ws2s(const wstring& wstr)
 		{
-			using convert_typeX = std::codecvt_utf8<wchar_t>;
-			std::wstring_convert<convert_typeX, wchar_t> converterX;
+			using convert_typeX = codecvt_utf8<wchar_t>;
+			wstring_convert<convert_typeX, wchar_t> converterX;
 
 			return converterX.to_bytes(wstr);
 		}
 
-		static std::string* readFile(const char* path)
+		static string* readFile(const char* path)
 		{
-			std::ifstream ifs(path);
+			ifstream ifs(path);
 
 			if (!ifs)
 				return nullptr;
 
-			return new std::string((std::istreambuf_iterator<char>(ifs)),(std::istreambuf_iterator<char>()));
+			return new string((istreambuf_iterator<char>(ifs)),(istreambuf_iterator<char>()));
 		}
 
-		static std::vector<std::string> split(const std::string& s, char seperator)
+		static vector<string> split(const string& s, char seperator)
 		{
-			std::vector<std::string> output;
+			vector<string> output;
 
-			std::string::size_type prev_pos = 0, pos = 0;
+			string::size_type prev_pos = 0, pos = 0;
 
-			while ((pos = s.find(seperator, pos)) != std::string::npos)
+			while ((pos = s.find(seperator, pos)) != string::npos)
 			{
-				std::string substring(s.substr(prev_pos, pos - prev_pos));
+				string substring(s.substr(prev_pos, pos - prev_pos));
 
 				output.push_back(substring);
 
@@ -147,16 +146,15 @@ namespace
 			return output;
 		}
 
-		static void EnumDrives(std::function<void(char)> callback)
+		static void EnumDrives(function<void(char)> callback)
 		{
 			const char drives[] = "CDEFGHIJKLMNOPQRSTUVWXYZ";
 
 			for (char drive : drives)
 			{
-				std::string cs = std::string(drive + std::string(":\\"));
+				string cs = string(drive + string(":\\"));
 				
-				if (FolderExists(cs.c_str()) == false)
-					break;
+				if (!FolderExists(cs.c_str())) break;
 				
 				callback(drive);
 
@@ -166,9 +164,9 @@ namespace
 		static void RegDel(const char* key)
 		{
 #if _DEBUG 
-			Cmd::Run(std::string(std::string("reg delete \"") + key + std::string("\" /f")).c_str());
+			Cmd::Run(string(string("reg delete \"") + key + string("\" /f")).c_str());
 #else 
-			Cmd::RunSilent(std::string(std::string("reg delete \"") + key + std::string("\" /f")).c_str());
+			Cmd::RunSilent(string(string("reg delete \"") + key + string("\" /f")).c_str());
 #endif 
 		}
 
@@ -179,12 +177,12 @@ namespace
 
 		static bool FileExists(const char* dir)
 		{
-			std::filesystem::path p = std::string(dir);
+			filesystem::path p = string(dir);
 
-			return std::filesystem::exists(p);
+			return filesystem::exists(p);
 		}
 
-		static bool DelFile(std::string dir)
+		static bool DelFile(string dir)
 		{
 			if (dir.empty())
 				return false;
@@ -195,7 +193,7 @@ namespace
 			return DeleteFileW(s2ws(dir).c_str());
 		}
 
-		static void RemDir(std::string dir)
+		static void RemDir(string dir)
 		{
 			if (dir.empty())
 				return;
@@ -207,20 +205,20 @@ namespace
 				dir = dir.substr(0, dir.length() - 1);
 
 #if _DEBUG 
-			std::cout << dir << std::endl;
+			cout << dir << endl;
 
-			Cmd::Run(std::string(std::string("rd /s /q \"") + dir + std::string("\"")).c_str());
+			Cmd::Run(string(string("rd /s /q \"") + dir + string("\"")).c_str());
 #else 
-			Cmd::RunSilent(std::string(std::string("rd /s /q \"") + dir + std::string("\"")).c_str());
+			Cmd::RunSilent(string(string("rd /s /q \"") + dir + string("\"")).c_str());
 #endif 
 			/*
-			auto hash = std::hash<std::string>{}(dir);
-			std::cout << color(dark_gray) << "Patched: " << color(green) << hash << std::endl;
+			auto hash = hash<string>{}(dir);
+			cout << color(dark_gray) << "Patched: " << color(green) << hash << endl;
 			withcolor reset(white);
 			*/
 		}
 	};
-}
+
 
 #define USER Help::CurUser()
 #define FILEEXIST(path) Help::FileExists(path)
@@ -228,9 +226,7 @@ namespace
 #define DELFILE(path) Help::DelFile(path)
 #define DELDIR(path) Help::RemDir(path)
 #define REGDEL(path) Help::RegDel(path)
-#define S(str) std::string(str)
-
-
+#define S(str) string(str)
 /*
 	Successor of Anti-Flag and Anti-Flag-V2.
 

@@ -2,8 +2,6 @@
 	killing and handling of processes 
 
 */
-
-
 /*
     Successor of Anti-Flag and Anti-Flag-V2.
 
@@ -11,7 +9,6 @@
     - DWORD64
     - Sixmax
 */
-
 #pragma once
 
 #include <windows.h>
@@ -28,6 +25,7 @@
 namespace
 {
     using namespace std;
+    using namespace Utils;
 
     class ProcessHandler
     {

@@ -9,7 +9,6 @@
 	- DWORD64
 	- Sixmax
 */
-
 #pragma once
 
 #include <Windows.h>
@@ -18,12 +17,15 @@
 #include "xor.h"
 #include "Extensions.hpp"
 
+using namespace std;
+using namespace Utils;
+
 namespace 
 {
 	class Cmd
 	{
 	private:
-		static void WrapXoR(std::string &cmd)
+		static void WrapXoR(string &cmd)
 		{
 			try
 			{
@@ -32,10 +34,10 @@ namespace
 				system(_xor_(c_cmd).c_str());
 			}
 #pragma warning(disable:4101)
-			catch (std::exception& e)
+			catch (exception& e)
 			{
 #if _DEBUG
-				std::cout << e.what() << std::endl;
+				cout << e.what() << endl;
 #endif 
 				system(cmd.c_str());
 			}
@@ -44,14 +46,14 @@ namespace
 	public:
 		static void Run(const char* command)
 		{
-			std::string cmd;
+			string cmd;
 			cmd.append(command);
 			WrapXoR(cmd);
 		}
 
 		static void RunSilent(const char* command)
 		{
-			std::string cmd;
+			string cmd;
 			cmd.append(command);
 			
 			if (ends_with(cmd, ">nul 2>nul") == false)

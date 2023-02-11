@@ -144,13 +144,13 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <LanguageStandard_C>Default</LanguageStandard_C>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
       <UACExecutionLevel>RequireAdministrator</UACExecutionLevel>
       <AdditionalManifestDependencies>%(AdditionalManifestDependencies)</AdditionalManifestDependencies>
       <AllowIsolation />
@@ -169,6 +169,7 @@
     <ClInclude Include="Overwatch.hpp" />
     <ClInclude Include="Patch.hpp" />
     <ClInclude Include="Processes.hpp" />
+    <ClInclude Include="RegKey.hpp" />
     <ClInclude Include="System.hpp" />
     <ClInclude Include="WinColor.hpp" />
     <ClInclude Include="WinRename.hpp" />

@@ -5,7 +5,6 @@
 	- DWORD64
 	- Sixmax
 */
-
 #pragma once 
 
 #include <list>
@@ -43,36 +42,6 @@ namespace
 		}
 	};
 }
-/*
-// TEMPLATE // 
-
-#pragma once
-
-#include "Patch.hpp"
-
-namespace
-{
-	using namespace std;
-
-	class Rainbow6 : public IPatch
-	{
-	public:
-		list<string>* GetProcesses()
-		{
-			return new list<string>{
-			};
-		}
-
-		bool DoPatch(char drive)
-		{
-
-
-			return true;
-		}
-	};
-}
-*/
-
 /*
 	Successor of Anti-Flag and Anti-Flag-V2.
 

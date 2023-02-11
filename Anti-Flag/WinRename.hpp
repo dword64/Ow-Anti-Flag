@@ -1,50 +1,60 @@
+/*
+	Successor of Anti-Flag and Anti-Flag-V2.
+
+	Developers:
+	- DWORD64
+	- Sixmax
+*/
 #ifndef WINRENAME_HPP
 #define WINRENAME_HPP
 
 #include <string>
+#include <fstream>
+#include <filesystem>
+#include <Windows.h>
+#include <LM.h>
+
 #include "Console.hpp"
 #include "Help.hpp"
 #include "Patch.hpp"
 
 #pragma comment(lib, "Netapi32.lib")
-#include <LM.h>
 
-namespace winre
-{
-    class WinRename
-    {
+using namespace std;
+using namespace Utils;
+
+namespace winre {
+    class WinRename {
     private:
-        static std::string setupPsFile(std::string& name)
-        {
-            std::string tempDir = std::filesystem::temp_directory_path().string();
+        static string setupPsFile(const string& name) {
+            auto temp_dir = filesystem::temp_directory_path().string();
+            if (!ends_with(temp_dir, "\\")) {
+                temp_dir += "\\";
+            }
 
-            if (ends_with(tempDir, "\\") == false)
-                tempDir += "\\";
+            auto ps_file_path = temp_dir + Help::GuidToString(Help::getGuid()) + ".ps1";
+            ofstream ps_file(ps_file_path);
+            ps_file << "Rename-Computer -NewName \"" << name << "\"";
+            ps_file.close();
 
-            std::string psFilePath = tempDir + Help::GuidToString(Help::getGuid()) + std::string(".ps1");
-
-            std::ofstream psFile(psFilePath);
-            psFile << "Rename-Computer -NewName \"" << name << "\"";
-            psFile.close();
-
-            return psFilePath;
+            return ps_file_path;
         }
 
     public:
-        static void DoRename(std::string name = "")
-        {
-            if (name.empty() == true)
+        static void DoRename(string name = "") {
+            if (name.empty()) {
                 name = Help::randomAsciiString(10);
+            }
 
-            //uncomment that line for debugging purpose!
-            //std:cout << name;
+            // uncomment this line for debugging purpose!
+            //cout << name;
             //Sleep(5000);
 
-            std::string path = setupPsFile(name);
-            system(std::string("powershell.exe -executionpolicy bypass -file \"" + path + std::string("\" >nul 2>nul")).c_str());
-            std::remove(path.c_str());
+            auto path = setupPsFile(name);
+            system(("powershell.exe -executionpolicy bypass -file \"" + path + "\" >nul 2>nul").c_str());
+            remove(path.c_str());
 
-            std::wstring newNameW = Help::s2ws(name);
+            auto new_name_w = Help::s2ws(name);
 
             SetComputerNameExA(ComputerNameNetBIOS, name.c_str());
             SetComputerNameExA(ComputerNameDnsHostname, name.c_str());
@@ -54,13 +64,20 @@ namespace winre
             SetComputerNameExA(ComputerNamePhysicalDnsHostname, name.c_str());
             SetComputerNameExA(ComputerNamePhysicalDnsDomain, name.c_str());
 
-            WCHAR szClusterNetBIOSName[MAX_COMPUTERNAME_LENGTH + 1];
-            DWORD nSize = ARRAYSIZE(szClusterNetBIOSName);
-            DnsHostnameToComputerNameW(newNameW.c_str(), szClusterNetBIOSName, &nSize);
+            WCHAR cluster_netbios_name[MAX_COMPUTERNAME_LENGTH + 1];
+            DWORD n_size = ARRAYSIZE(cluster_netbios_name);
+            DnsHostnameToComputerNameW(new_name_w.c_str(), cluster_netbios_name, &n_size);
 
-            NetRenameMachineInDomain(0, newNameW.c_str(), 0, 0, NETSETUP_ACCT_CREATE);
+            NetRenameMachineInDomain(0, new_name_w.c_str(), 0, 0, NETSETUP_ACCT_CREATE);
         }
     };
 }
 
 #endif 
+/*
+	Successor of Anti-Flag and Anti-Flag-V2.
+
+	Developers:
+	- DWORD64
+	- Sixmax
+*/
