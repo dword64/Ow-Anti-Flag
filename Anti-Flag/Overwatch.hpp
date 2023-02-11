@@ -111,13 +111,9 @@ namespace OverwatchFlags
 			REGDEL("HKLM\\SOFTWARE\\00330-80000-00000-AA302");
 			/* END of Ow-Cheat Critical Hit */
 
-			/* START of Ow-Cheat hyperFlick */ //Probs outdated
+			/* START of Ow-Cheat HyperFlick/Oreo/Noble */
 			DELDIR(drive + S(":\\Users\\") + USER + S("\\AppData\\Local\\Temp\\")); //due some User reports, we found out that they save/leave traces on your Pc inside the Temp folder! Credits you know
 			/* END of Ow-Cheat hyperFlick */
-
-			/* START of Ow-Cheat Oreo */
-			DELFILE(drive + S(":\\Users\\") + USER + S("\\AppData\\Roaming\\setup_sharp")); //due some User reports, we found out that they save/leave traces on your Pc inside the Temp folder! Credits you know
-			/* END of Ow-Cheat Oreo */
 #pragma endregion
 
 			return true;
