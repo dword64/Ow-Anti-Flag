@@ -26,7 +26,7 @@ Generally you are fine with just using Anti-Flag, as Blizzard generates one larg
 
 ## How to Use ?
 
-Just run it, thats it really. 
+Just run it **as Administrator**, that's it really. 
 
 ## How to Build ?
 
